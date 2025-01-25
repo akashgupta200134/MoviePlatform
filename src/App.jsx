@@ -1,26 +1,26 @@
-import { useState } from "react";
-import Cards from "./components/Cards";
-import Form from "./components/Form";
+import { Link, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import User from "./components/User";
+import UserDetails from "./components/UserDetails";
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  const handleSubmitdata = (data) => {
-    setUsers(() => [...users, data]); 
-  };
-
-  const handleRemove = (id) => {
-    setUsers(() => users.filter((items, index) => index !== id)); 
-  };
-
   return (
     <>
       <div>
-        <Cards usersdata={users} handleRemove={handleRemove} />
-      </div>
+        <nav className=" flex justify-center items-center gap-10 mt-10 ">
+          <Link to="/"> Home</Link>
+          <Link to="/user"> User</Link>
+          
+          {/* <Link to="/userdetails">UserDetails</Link> */}
+        </nav>
 
-      <div>
-        <Form handleSubmitdata={handleSubmitdata} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+
+          <Route path="/user" element={<User />} />
+
+          <Route path="/user/:id" element={<UserDetails />} />
+        </Routes>
       </div>
     </>
   );
