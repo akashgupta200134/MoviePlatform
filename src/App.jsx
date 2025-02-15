@@ -1,10 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteUser } from './store/Reducers/userReducer';
 
 const App = () => {
-  const {users} = useSelector((state) => state.userReducer); 
+  const {users} = useSelector((state) => state.userReducer);  /// useSeclctor ke help se hum store ke data ko  hum apne kisi bhi component me use kar skate hai
+
+  const dispatch  = useDispatch(); // hume action ko call kanre ke liye useDisoatch function ka use karne padta hai
 
   
+   const DeleteHandler = (index) =>{
+    // console.log(index);
+    dispatch(deleteUser(index));  // yaha pe humne action ko call kiya hai useDispatch ka use kar ke 
+    
+
+   }
 
 
   
@@ -18,12 +27,16 @@ const App = () => {
       <h1 className=' text-white text-5xl font-bold'>User List </h1>
       </div>
 
-      <ul className=' mt-5 ml-52'>
+      <ul className=' mt-5 ml-52 cursor-pointer'>
   
  {users.map((items , index) =>{
        return <li key={index} className='' >
-        {items.id}
-        {items.username}
+        {/* {items.userid} */}
+        <h1>
+          {items.username} 
+          <span  onClick={() => DeleteHandler(index)} className=' text-red-500 font-semibold px-1'>X</span>
+        </h1>
+       
 </li>
  }) 
 

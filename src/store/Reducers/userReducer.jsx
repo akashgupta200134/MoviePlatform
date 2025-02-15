@@ -52,7 +52,17 @@ const initialState = {
 export const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    // actions 
+    // isme likhe jaane wale are action honge
+    deleteUser : (state , action) =>{
+        state.users.splice(action.payload , 1 );
+    }
+
+
+
+  },
 });
 
-export default userSlice.reducer;
+export const {deleteUser} = userSlice.actions ; // yaha pe hum un action ko use karne ke liye unko export kar rahe hai dusre component me use karne ke liye  like humne aabhi app componnent me import kiya hai inko use karne ke liye
+export default userSlice.reducer;   // reducres ko bho suare component me use karne ke liye export kar rahe hai 
