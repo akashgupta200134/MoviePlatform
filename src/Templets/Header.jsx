@@ -29,7 +29,7 @@ const Header = ({data}) => {
         <p className=' text-white px-1 font-semibold  capitalize mt-1 '> <span> </span> {data.media_type} 
           </p>  
               
-      <button className=' h-10 w-[180px] bg-white  flex flex-row items-center justify-start gap-2 px-5  mt-3 rounded-md font-semibold'> <svg height="20" viewBox="0 0 8 8" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m0 0v6l6-3z" transform="translate(1 1)"/></svg>
+      <button className=' shadow-xl shadow-zinc-700 h-10 w-[180px] bg-white  flex flex-row items-center justify-start gap-2 px-5  mt-3 rounded-md font-semibold'> <svg height="20" viewBox="0 0 8 8" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m0 0v6l6-3z" transform="translate(1 1)"/></svg>
        Watch Trailer </button>
 
     </div>

@@ -3,6 +3,7 @@ import SideNav from "../Templets/SideNav";
 import TopNav from "../Templets/TopNav";
 import Header from "../Templets/Header";
 import axios from "../utils/Axios";
+import Horizontalcards from "../Templets/Horizontalcards";
 
 const Home = () => {
   document.title = "RangManch | Home";
@@ -20,28 +21,45 @@ const Home = () => {
       console.log(error);
     }
   };
+  // console.log(wallpaper);
 
-  console.log(wallpaper);
 
+  const [trending, setTrending] = useState(null);
+
+  const getTrending = async () => {
+    try {
+
+      const {data} = await axios.get(`/trending/all`);
+      setTrending(data.results);
+    
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  console.log(trending);
   useEffect(() => {
     !wallpaper && getWallpaper();
+    !trending && getTrending()
   }, []);
 
+
+  
   return wallpaper ? (
     <>
       <SideNav />
-    
-     
+
         <div> 
            <TopNav />
           <Header data={wallpaper} />
-     
+          <Horizontalcards data={trending}/>
+
         </div>
           
     </>
-  ) : (
-    <h1>Loding...</h1>
-  );
+  ) : (<h1>Loding...</h1>)
+  
 };
 
 export default Home;
