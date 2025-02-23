@@ -9,7 +9,7 @@ const Header = ({data}) => {
         url(https://image.tmdb.org/t/p/original/${data.backdrop_path || data.poster_path || data.profile_path})`,
         backgroundPosition : ' top center',
         backgroundSize : 'cover',
-        height : "450px",
+        height : "430px",
         width : "1150px",
        
         
