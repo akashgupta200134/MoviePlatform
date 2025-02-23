@@ -14,7 +14,7 @@ const TopNav = () => {
   };
 
   useEffect(() => {
-    GetSearches();
+   GetSearches();
   }, [query]);
 
   return (
