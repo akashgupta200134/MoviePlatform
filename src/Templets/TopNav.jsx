@@ -18,7 +18,7 @@ const TopNav = () => {
   }, [query]);
 
   return (
-    <div className=" w-auto h-[10vh]  relative flex items-center justify-start  ml-[20%] mt-3">
+    <div className=" w-[50%] h-[10vh]  relative flex items-center justify-start ml-[20%] mt-3">
       <i className="ri-search-2-line text-white ml-2 -mr-8 text-3xl "></i>
 
       <input
@@ -38,7 +38,7 @@ const TopNav = () => {
         ></i>
       )}
 
-      <div className="absolute w-[50%] max-h-[50vh]  mt-6 ml-3 bg-zinc-200 top-[90%] rounded-md overflow-auto">
+      <div className="absolute w-[70%] max-h-[50vh]  mt-2 ml-3 bg-zinc-200 top-[90%] rounded-md overflow-auto">
         {search.map((items, index) => (
           <Link
             key={index}
