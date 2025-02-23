@@ -8,10 +8,9 @@ const TopNav = () => {
   const [search, setsearch] = useState([]);
 
   const GetSearches = async () => {
-    const {data} = await axios.get(`/search/multi?query=${query}`);
+    const { data } = await axios.get(`/search/multi?query=${query}`);
     // console.log(data);
     setsearch(data.results);
-
   };
 
   useEffect(() => {
@@ -45,14 +44,25 @@ const TopNav = () => {
             key={index}
             className=" hover:text-black hover-bg-zinc-400 duration-300 w-[100%] font-semibold text-zinc-600  py-4 px-5 flex justify-start items-center border-b-2 border-zinc-100"
           >
-            <img  className=" w-[10vh] h-[10vh] object- rounded-lg mr-4 " src={`https://image.tmdb.org/t/p/original/${items.backdrop_path || items.poster_path || items.profile_path}`} alt="Image Not Available"/>
-            <span>{items.title || items.orignal_title || items.name || items.original_name }</span>
+            <img
+              className=" w-[10vh] h-[10vh] object- rounded-lg mr-4 shadow-lg "
+              src={`https://image.tmdb.org/t/p/original/${
+                items.backdrop_path || items.poster_path || items.profile_path
+              }`}
+              alt="Image Not Available"
+            />
+            <span>
+              {items.title ||
+                items.orignal_title ||
+                items.name ||
+                items.original_name}
+            </span>
           </Link>
         ))}
-
       </div>
     </div>
   );
 };
 
 export default TopNav;
+
