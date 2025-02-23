@@ -29,7 +29,7 @@ const Home = () => {
   const getTrending = async () => {
     try {
 
-      const {data} = await axios.get(`/trending/all`);
+      const { data } = await axios.get(`/trending/all/day`);
       setTrending(data.results);
     
     } catch (error) {
@@ -50,16 +50,17 @@ const Home = () => {
     <>
       <SideNav />
 
-        <div> 
+        <div className=" "> 
            <TopNav />
           <Header data={wallpaper} />
-          <Horizontalcards data={trending}/>
+          <Horizontalcards trendingData={trending}/>
 
         </div>
           
     </>
-  ) : (<h1>Loding...</h1>)
-  
+  ) : (
+    <h1>Loding...</h1>
+  );
 };
 
 export default Home;
