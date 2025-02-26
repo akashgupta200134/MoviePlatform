@@ -46,12 +46,12 @@ const TopNav = () => {
       )}
 
       {query.length > 0 && (
-        <div className="absolute w-[70%] max-h-[50vh] mt-2 ml-3  bg-transparent  top-[90%] rounded-md overflow-auto shadow-lg z-10">
+        <div className="absolute w-[70%] max-h-[50vh] mt-2 ml-3  text-white bg-zinc-900  top-[90%] rounded-md overflow-auto shadow-lg z-10">
           {search.map((items, index) => (
             <Link
               key={index}
               to={`/${items.media_type}/${items.id}`}
-              className="hover:bg-zinc-700 duration-300 w-full font-semibold text-zinc-400 py-2 px-5 flex justify-start items-center border-b border-zinc-800"
+              className="hover:bg-zinc-600 hover:text-white duration-300 w-full font-semibold text-zinc-400 py-2 px-5 flex justify-start items-center border-b border-zinc-800"
             >
               {items.backdrop_path ||
               items.poster_path ||
