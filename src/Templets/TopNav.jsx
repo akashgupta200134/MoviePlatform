@@ -1,32 +1,39 @@
 import axios from "../utils/Axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const TopNav = () => {
   const [query, setQuery] = useState("");
-
   const [search, setsearch] = useState([]);
 
   const GetSearches = async () => {
-    const { data } = await axios.get(`/search/multi?query=${query}`);
-    // console.log(data);
-    setsearch(data.results);
+    try {
+      if (!query) {
+        setsearch([]);
+        return;
+      }
+      const { data } = await axios.get(`/search/multi?query=${query}`);
+      setsearch(data.results);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setsearch([]);
+    }
   };
 
   useEffect(() => {
-   GetSearches();
+    GetSearches();
   }, [query]);
 
   return (
-    <div className=" w-[50%] h-[10vh]  relative flex items-center justify-start ml-[20%] mt-3">
-      <i className="ri-search-2-line text-white ml-2 -mr-8 text-3xl "></i>
+    <div className="w-[50%] h-[10vh] relative flex items-center justify-start ml-[20%] mt-3">
+      <i className="ri-search-2-line text-white ml-2 -mr-8 text-3xl"></i>
 
       <input
         type="text"
         placeholder="Search Anything"
         onChange={(e) => setQuery(e.target.value)}
         value={query}
-        className="w-[50%] p-5 mx-10 text-white  text-xl   border-none outline-none bg-transparent rounded-xl"
+        className="w-[50%] p-3 mx-10 text-white text-xl border-none outline-none bg-transparent rounded-xl"
       />
 
       {query.length > 0 && (
@@ -34,35 +41,47 @@ const TopNav = () => {
           onClick={() => {
             setQuery("");
           }}
-          className="ri-close-large-line text-zinc-400 text-3xl"
+          className="ri-close-large-line text-zinc-400 text-3xl cursor-pointer"
         ></i>
       )}
 
-      <div className="absolute w-[70%] max-h-[50vh]  mt-2 ml-3 bg-zinc-200 top-[90%] rounded-md overflow-auto">
-        {search.map((items, index) => (
-          <Link
-            key={index}
-            className=" hover:text-black hover-bg-zinc-400 duration-300 w-[100%] font-semibold text-zinc-600  py-4 px-5 flex justify-start items-center border-b-2 border-zinc-100"
-          >
-            <img
-              className=" w-[10vh] h-[10vh] object- rounded-lg mr-4 shadow-lg "
-              src={`https://image.tmdb.org/t/p/original/${
-                items.backdrop_path || items.poster_path || items.profile_path
-              }`}
-              alt="Image Not Available"
-            />
-            <span>
-              {items.title ||
-                items.orignal_title ||
-                items.name ||
-                items.original_name}
-            </span>
-          </Link>
-        ))}
-      </div>
+      {query.length > 0 && (
+        <div className="absolute w-[70%] max-h-[50vh] mt-2 ml-3  bg-transparent  top-[90%] rounded-md overflow-auto shadow-lg z-10">
+          {search.map((items, index) => (
+            <Link
+              key={index}
+              to={`/${items.media_type}/${items.id}`}
+              className="hover:bg-zinc-700 duration-300 w-full font-semibold text-zinc-400 py-2 px-5 flex justify-start items-center border-b border-zinc-800"
+            >
+              {items.backdrop_path ||
+              items.poster_path ||
+              items.profile_path ? (
+                <img
+                  className="w-[60px] h-[60px] object-cover rounded-lg mr-4 shadow-md"
+                  src={`https://image.tmdb.org/t/p/original/${
+                    items.backdrop_path ||
+                    items.poster_path ||
+                    items.profile_path
+                  }`}
+                  alt={items.title || items.name || "Search Result"}
+                />
+              ) : (
+                <div className="w-[60px] h-[60px] rounded-lg mr-4 bg-zinc-700 flex items-center justify-center">
+                  <i className="ri-image-2-line text-2xl text-gray-400"></i>
+                </div>
+              )}
+              <span>
+                {items.title ||
+                  items.orignal_title ||
+                  items.name ||
+                  items.original_name}
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default TopNav;
-
