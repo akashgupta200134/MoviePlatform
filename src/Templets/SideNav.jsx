@@ -14,7 +14,7 @@ const SideNav = () => {
           <ul className="space-y-2">
             <li>
               <Link
-                to="/"
+                to="/trending"
                 className="flex items-center p-3 rounded-md hover:bg-[#6556CD] transition-colors duration-200"
               >
                 <i className="ri-fire-fill mr-2"></i>
