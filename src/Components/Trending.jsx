@@ -4,7 +4,7 @@ import TopNav from "../Templets/TopNav";
 import { useEffect, useState } from "react";
 import axios from "../utils/Axios";
 import Cards from "../Templets/Cards";
-import Loader from '../Templets/Loader'
+import Loader from '../Templets/Loader';
 
 
 const Trending = () => {

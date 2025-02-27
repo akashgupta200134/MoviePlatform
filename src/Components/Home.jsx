@@ -4,7 +4,7 @@ import TopNav from "../Templets/TopNav";
 import Header from "../Templets/Header";
 import axios from "../utils/Axios";
 import Horizontalcards from "../Templets/Horizontalcards";
-import Loader from "../Templets/loader";
+import Loader from "../Templets/Loader";
 
 
 const Home = () => {
