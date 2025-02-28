@@ -1,4 +1,4 @@
-// Cards.jsx
+
 import { Link } from "react-router-dom";
 
 const Cards = ({ data, title }) => {

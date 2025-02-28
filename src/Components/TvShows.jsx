@@ -1,6 +1,5 @@
-
 import axios from '../utils/Axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Templets/Loader';
 import Cards from '../Templets/Cards';
@@ -8,85 +7,68 @@ import Dropdown from '../Templets/Dropdown';
 import TopNav from '../Templets/TopNav';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-
-
-
-const Popular = () => {
-
-
-    document.title = "RangManch | Popular";
+const TvShows = () => {
+    document.title = "RangManch | Tvshows";
     const navigate = useNavigate();
-    const [category, setcategory] = useState("movie");
-    const [popular, setPopular] = useState([]);
+    const [category, setcategory] = useState("airing_today");
+    const [tvshows, setTvshows] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, sethasMore] = useState(true);
-   
-    const getPopular = async () => {
+ 
+
+    const getTvshows = async () => {
         try {
-         
-            const { data } = await axios.get(
-                `${category}/popular?page=${page}`
-            );
+            const { data } = await axios.get(`tv/${category}?page=${page}`);
 
             if (data.results.length > 0) {
-                setPopular((prevpopular) => [...prevpopular, ...data.results]);
+                setTvshows((prevtv) => [...prevtv, ...data.results]);
                 setPage(page + 1);
             } else {
                 sethasMore(false);
             }
         } catch (error) {
             console.error("Error fetching trending data:", error);
-        } 
-        // console.log(popular);
-        
-    };
-
-    const refreshHandler = () => {
-        setPage(1);
-        setPopular([]);
-        sethasMore(true);
-        getPopular();
+        } finally {
+          setLoading(false);
+        }
     };
 
     useEffect(() => {
-        refreshHandler();
+        setPage(1);
+        setTvshows([]);
+        sethasMore(true);
+        getTvshows();
     }, [category]);
 
-
-
-
-
     return (
-        <div className="w-screen h-screen  ">
-            <div className="w-full flex items-center justify-center   "> 
+        <div className="w-screen h-screen">
+            <div className="w-full flex items-center justify-center">
                 <i onClick={() => navigate(-1)} className="hover:text-[#6556CD] text-white text-2xl ml-4 mr-4 ri-arrow-left-line"></i>
-                <h1 className="text-2xl font-bold ml-3 text-white ">Popular
+                <h1 className="text-2xl font-bold ml-3 text-white "> Tvshows
                     <span className=" ml-2 text-lg capitalize ">
-                       ({category})
+                        ({category})
                     </span>
-            
                 </h1>
                 <TopNav />
                 <div className=" flex flex-row gap-2 mr-5 ">
-                <Dropdown title="Filter" options={["tv", "movie"]} func={(e) => { setcategory(e.target.value); }} />
-              
-
+                    <Dropdown title="Filter" options={["on_the_air", "popular", "top_rated", "airing_today"]} func={(e) => { setcategory(e.target.value); }} />
                 </div>
             </div>
 
-            {page === 1 ? (
-                <Loader />
-            ) : (
+       
+               
+            (
                 <InfiniteScroll
-                    dataLength={popular.length}
-                    next={getPopular}
+                    dataLength={tvshows.length}
+                    next={getTvshows}
                     hasMore={hasMore}
                     loader={<Loader />}
                 >
-                    <Cards data={popular} title={category} />
+                    <Cards data={tvshows} title={category} />
                 </InfiniteScroll>
-            )}
+            )
         </div>
     );
 };
-export default Popular
+
+export default TvShows;

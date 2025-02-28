@@ -29,25 +29,26 @@ const SideNav = () => {
                 <i className="ri-bar-chart-fill mr-2"></i>
                 <span>Popular</span>
               </Link>
-            </li>
-            <li>
+            </li> 
+              <li>
               <Link
-                to="/tv-shows"
-                className="flex items-center p-3 rounded-md hover:bg-[#6556CD] transition-colors duration-200"
-              >
-                <i className="ri-tv-fill mr-2"></i>
-                <span>TV Shows</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/movies"
+                to="/movie"
                 className="flex items-center p-3 rounded-md hover:bg-[#6556CD]  transition-colors duration-200"
               >
                 <i className="ri-movie-2-fill mr-2"></i>
                 <span>Movies</span>
               </Link>
             </li>
+            <li>
+              <Link
+                to="/tvshows"
+                className="flex items-center p-3 rounded-md hover:bg-[#6556CD] transition-colors duration-200"
+              >
+                <i className="ri-tv-fill mr-2"></i>
+                <span>TV Shows</span>
+              </Link>
+            </li>
+         
             <li>
               <Link
                 to="/people"

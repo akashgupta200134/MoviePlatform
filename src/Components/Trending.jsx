@@ -8,6 +8,8 @@ import Loader from '../Templets/Loader';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Trending = () => {
+document.title = "RangManch | Trending";
+
     const navigate = useNavigate();
     const [category, setcategory] = useState("all");
     const [trending, settrending] = useState([]);
@@ -51,7 +53,11 @@ const Trending = () => {
         <div className="w-screen h-screen  ">
             <div className="w-full flex items-center justify-center   "> 
                 <i onClick={() => navigate(-1)} className="hover:text-[#6556CD] text-white text-2xl ml-4 mr-4 ri-arrow-left-line"></i>
-                <h1 className="text-2xl font-bold ml-3 text-white ">Trending</h1>
+                <h1 className="text-2xl font-bold ml-3 text-white "> Trending
+                <span className=" ml-2 capitalize  text-lg">
+                       ({category})
+                    </span>
+                </h1>
                 <TopNav />
                 <div className=" flex flex-row gap-2 mr-5 ">
                 <Dropdown title="Filter" options={["tv", "movie", "all"]} func={(e) => { setcategory(e.target.value); }} />

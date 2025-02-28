@@ -11,25 +11,23 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 
-const Popular = () => {
+const Movie = () => {
 
 
-    document.title = "RangManch | Popular";
+    document.title = "RangManch | Movie";
     const navigate = useNavigate();
-    const [category, setcategory] = useState("movie");
-    const [popular, setPopular] = useState([]);
+    const [category, setcategory] = useState("now_playing");
+    const [movie, setMovie] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, sethasMore] = useState(true);
    
-    const getPopular = async () => {
+    const getMovie = async () => {
         try {
          
-            const { data } = await axios.get(
-                `${category}/popular?page=${page}`
-            );
+            const { data } = await axios.get(`movie/${category}?page=${page}`);
 
             if (data.results.length > 0) {
-                setPopular((prevpopular) => [...prevpopular, ...data.results]);
+                setMovie((prevmovie) => [...prevmovie, ...data.results]);
                 setPage(page + 1);
             } else {
                 sethasMore(false);
@@ -37,15 +35,16 @@ const Popular = () => {
         } catch (error) {
             console.error("Error fetching trending data:", error);
         } 
-        // console.log(popular);
+        console.log(movie);
+        
         
     };
 
     const refreshHandler = () => {
         setPage(1);
-        setPopular([]);
+        setMovie([]);
         sethasMore(true);
-        getPopular();
+        getMovie();
     };
 
     useEffect(() => {
@@ -60,15 +59,14 @@ const Popular = () => {
         <div className="w-screen h-screen  ">
             <div className="w-full flex items-center justify-center   "> 
                 <i onClick={() => navigate(-1)} className="hover:text-[#6556CD] text-white text-2xl ml-4 mr-4 ri-arrow-left-line"></i>
-                <h1 className="text-2xl font-bold ml-3 text-white ">Popular
-                    <span className=" ml-2 text-lg capitalize ">
+                <h1 className="text-2xl font-bold ml-3 text-white "> Movie
+                <span className=" ml-2 text-lg capitalize ">
                        ({category})
                     </span>
-            
                 </h1>
                 <TopNav />
                 <div className=" flex flex-row gap-2 mr-5 ">
-                <Dropdown title="Filter" options={["tv", "movie"]} func={(e) => { setcategory(e.target.value); }} />
+                <Dropdown title="Filter" options={["popular" , "top_rated" , "upcoming" , "now_playing"]} func={(e) => { setcategory(e.target.value); }} />
               
 
                 </div>
@@ -78,15 +76,15 @@ const Popular = () => {
                 <Loader />
             ) : (
                 <InfiniteScroll
-                    dataLength={popular.length}
-                    next={getPopular}
+                    dataLength={movie.length}
+                    next={getMovie}
                     hasMore={hasMore}
                     loader={<Loader />}
                 >
-                    <Cards data={popular} title={category} />
+                    <Cards data={movie} title={category} />
                 </InfiniteScroll>
             )}
         </div>
     );
 };
-export default Popular
+export default Movie
