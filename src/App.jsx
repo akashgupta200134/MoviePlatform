@@ -3,7 +3,10 @@ import Home from "./Components/Home"
 import Treanding from "./Components/Trending"
 
 
+
 const App = () => {
+
+
   return (
     <div className=" bg-[#1F1E24]  w-screen h-screen flex   ">
        <Routes>
